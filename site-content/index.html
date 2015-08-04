@@ -11,7 +11,7 @@
       $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
         function(json) {
           myip = json.ip;
-          $("#latest-rate").text(json.ip);
+          $("#ip-addre").text(myip);
 
           var string = "ws://" + myip + ":8080/rates"
 
@@ -55,6 +55,7 @@
 			<!-- <input id="name" type="text" />
 			<input type="button" id="sendBtn" value="send"></input>
       <ul id="msg-list"></ul> -->
+      <p id="ip-addr">Unknown</p>
       <p id="rate-count">None</p>
       <p id="latest-rate">None</p>
 	</body>
