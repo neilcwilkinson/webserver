@@ -153,7 +153,7 @@ func parseRates() {
 
 				body, _ := json.Marshal(r)
 				message := messaging.Message{From: "Me", To: "You", Subject: "Price", Body: string(body)}
-				fmt.Printf("\r%s", string(body))
+				//fmt.Printf("\r%s", string(body))
 				go sendmessage(message)
 			}
 		}
