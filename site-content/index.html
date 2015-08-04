@@ -17,10 +17,10 @@
 
           var ws = new WebSocket("ws://" + myip + ":8080/rates");
           ws.onopen = function(e) {
-          $("#latest-rate").text("Welcome");
+          $("#latest-rate").text("Connected");
         };
         ws.onclose = function(e) {
-          $("#latest-rate").text("Dangit");
+          $("#latest-rate").text("Disconnected");
         };
         ws.onmessage = function(e) {
           rateCount += 1;
