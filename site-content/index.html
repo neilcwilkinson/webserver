@@ -11,7 +11,7 @@
       $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
         function(json) {
           myip = json.ip;
-          $("#ip-addre").text(myip);
+          $("#ip-addr").text(myip);
 
           var string = "ws://" + myip + ":8080/rates"
 
