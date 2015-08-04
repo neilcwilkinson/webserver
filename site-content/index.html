@@ -3,11 +3,20 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Sample of websocket with golang</title>
-		<script src="jquery-1.8.3.min.js"></script>
-    <script>
-      $(function() {
-        var ws = new WebSocket("ws://104.197.95.193:8080/rates");
-        ws.onopen = function(e) {
+		<script src="jquery-1.8.3.min.js"></script>    
+
+    <script type="application/javascript">
+    var myip = 'unknown'
+     $(document).ready(function() {
+      $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+        function(json) {
+          myip = json.ip;
+          $("#latest-rate").text(json.ip);
+
+          var string = "ws://" + myip + ":8080/rates"
+
+          var ws = new WebSocket("ws://" + myip + ":8080/rates");
+          ws.onopen = function(e) {
           $("#latest-rate").text("Welcome");
         };
         ws.onclose = function(e) {
@@ -26,10 +35,21 @@
           console.log("送信メッセージ:" + data);
           $('<li>').text(data).appendTo($ul);
         });
+        }
+      );
+    });
+
+      $(function() {
+
       });
 
       var rateCount = 0;
 		</script>
+
+    <script type="application/javascript">
+ 
+</script>
+
 	</head>
 	<body>
 			<!-- <input id="name" type="text" />
