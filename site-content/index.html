@@ -6,7 +6,7 @@
 		<script src="jquery-1.8.3.min.js"></script>
     <script>
       $(function() {
-        var ws = new WebSocket("ws://localhost:8080/rates");
+        var ws = new WebSocket("ws://104.197.95.193:8080/rates");
         ws.onopen = function(e) {
           $("#latest-rate").text("Welcome");
         };
