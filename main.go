@@ -4,11 +4,9 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net"
 	"net/http"
 	"os"
-	"os/user"
 	"strconv"
 	"strings"
 
@@ -164,12 +162,6 @@ func parseRates() {
 
 func main() {
 
-	usr, err := user.Current()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(usr.HomeDir)
-
 	fmt.Println("Started.")
 	go parseRates()
 
@@ -177,8 +169,8 @@ func main() {
 	fmt.Println("Starting httpserver")
 
 	http.Handle("/rates", websocket.Handler(createserver))
-	http.Handle("/", http.FileServer(http.Dir(usr.HomeDir+"/site-content")))
-	err = http.ListenAndServe(":8080", nil)
+	http.Handle("/", http.FileServer(http.Dir("site-content")))
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		panic("ListenAndServe: " + err.Error())
 	}
