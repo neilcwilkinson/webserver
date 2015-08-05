@@ -162,7 +162,7 @@ func parseRates() {
 
 func main() {
 
-	fmt.Println("Started.")
+	fmt.Println("We have started!!")
 	go parseRates()
 
 	go rssConnect("demorates.efxnow.com:443", "91C5FF91DB2E7F353002B1604C5C7F66/COMPACT")
