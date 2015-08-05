@@ -178,7 +178,7 @@ func main() {
 
 	http.Handle("/rates", websocket.Handler(createserver))
 	http.Handle("/", http.FileServer(http.Dir(usr.HomeDir+"/site-content")))
-	err := http.ListenAndServe(":8080", nil)
+	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
 		panic("ListenAndServe: " + err.Error())
 	}
