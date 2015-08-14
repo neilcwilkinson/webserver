@@ -13,7 +13,7 @@ import (
 	"github.com/neilcwilkinson/messaging"
 
 	"github.com/neilcwilkinson/authentication"
-
+	"github.com/neilcwilkinson/mongo"
 	"golang.org/x/net/websocket"
 )
 
@@ -152,8 +152,10 @@ func parseRates() {
 				r.Status = ratemap[4]
 
 				body, _ := json.Marshal(r)
+
 				message := messaging.Message{From: "Me", To: "You", Subject: "Price", Body: string(body)}
-				fmt.Printf("\r%s", string(body))
+				go mongo.LogMessage("currentrates", r.Product, body)
+				//fmt.Printf("\r%s", string(body))
 				go sendmessage(message)
 			}
 		}
@@ -161,8 +163,13 @@ func parseRates() {
 }
 
 func main() {
-
 	fmt.Println("We have started!!")
+
+	mongoerr := mongo.Initialize("localhost:27017")
+	if mongoerr != nil {
+		fmt.Println("An error occurred connecting to mongo:", mongoerr)
+	}
+
 	go parseRates()
 
 	go rssConnect("demorates.efxnow.com:443", "91C5FF91DB2E7F353002B1604C5C7F66/COMPACT")
