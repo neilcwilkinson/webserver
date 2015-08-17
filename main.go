@@ -155,7 +155,7 @@ func parseRates() {
 
 				message := messaging.Message{From: "Me", To: "You", Subject: "Price", Body: string(body)}
 				go mongo.LogMessage("currentrates", r.Product, body)
-				//fmt.Printf("\r%s", string(body))
+				fmt.Printf("\r%s", string(body))
 				go sendmessage(message)
 			}
 		}
@@ -165,10 +165,7 @@ func parseRates() {
 func main() {
 	fmt.Println("We have started!!")
 
-	mongoerr := mongo.Initialize("localhost:27017")
-	if mongoerr != nil {
-		fmt.Println("An error occurred connecting to mongo:", mongoerr)
-	}
+	mongo.Initialize("localhost:27017")
 
 	go parseRates()
 
