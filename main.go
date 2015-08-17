@@ -165,7 +165,7 @@ func parseRates() {
 func main() {
 	fmt.Println("We have started!!")
 
-	mongo.Initialize("localhost:27017")
+	mongo.Initialize("betfolio-mongo-db-bcvi:27017")
 
 	go parseRates()
 
