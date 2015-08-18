@@ -14,6 +14,7 @@ import (
 
 	"github.com/neilcwilkinson/authentication"
 	"github.com/neilcwilkinson/mongo"
+	rc "github.com/neilcwilkinson/rabbit/consumer"
 	"golang.org/x/net/websocket"
 )
 
@@ -165,7 +166,10 @@ func parseRates() {
 func main() {
 	fmt.Println("We have started!!")
 
-	mongo.Initialize("betfolio-mongo-db-bcvi:27017")
+	go rc.Initialize()
+
+	//mongo.Initialize("localhost:27017")
+	mongo.Initialize("mongodb1-betfolio-mongo-db-3kjz:27017")
 
 	go parseRates()
 
