@@ -168,8 +168,8 @@ func main() {
 	fmt.Println("We have started!!")
 
 	fmt.Println("Attempting to connect to Rabbit..")
-	rc.Initialize()
-	rp.Initialize()
+	go rc.Initialize()
+	go rp.Initialize()
 
 	//mongo.Initialize("localhost:27017")
 	mongo.Initialize("mongodb1-betfolio-mongo-db-3kjz:27017")
