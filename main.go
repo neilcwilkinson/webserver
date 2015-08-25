@@ -156,6 +156,8 @@ func parseRates() {
 				body, _ := json.Marshal(r)
 
 				message := messaging.Message{From: "Me", To: "You", Subject: "Price", Body: string(body)}
+
+				go rp.Produce(string(body))
 				go mongo.LogMessage("currentrates", r.Product, body)
 				fmt.Printf("\r%s", string(body))
 				go sendmessage(message)
@@ -168,8 +170,11 @@ func main() {
 	fmt.Println("We have started!!")
 
 	fmt.Println("Attempting to connect to Rabbit..")
-	go rc.Initialize()
-	go rp.Initialize()
+	// go rc.Initialize("amqp://guest:guest@10.5.215.75:5672/", "hello")
+	// go rp.Initialize("amqp://guest:guest@10.5.215.75:5672/", "hello")
+
+	go rc.Initialize("amqp://fahoobagats:Fytg*pv2c,iCUT@rabbitmq-statsnode-3a5n:5672/", "hello")
+	go rp.Initialize("amqp://fahoobagats:Fytg*pv2c,iCUT@rabbitmq-statsnode-3a5n:5672/", "hello")
 
 	//mongo.Initialize("localhost:27017")
 	mongo.Initialize("mongodb1-betfolio-mongo-db-3kjz:27017")
